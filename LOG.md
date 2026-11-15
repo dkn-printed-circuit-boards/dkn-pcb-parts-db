@@ -6,4 +6,5 @@
   The hub's pushed history was rewritten to match (hub BULLETIN B-261114-10).
 - Secret scanning and push protection on for this repo and the hub, plus the org default for new repos
   (hub BULLETIN B-261114-11, -12).
-- Added MIT LICENSE. First push.
+- Added MIT LICENSE. First push, after fixing the hub's sync.sh so it can push a brand-new repo
+  (hub BULLETIN B-261114-13, B-261115-1).

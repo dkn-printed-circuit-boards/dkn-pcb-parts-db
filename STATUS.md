@@ -16,7 +16,10 @@ Dolt is the fallback. A bake-off on 3 test parts decides.
 **Bake-off compares:** how a superseded fact reads in a git diff; the 5 real queries; a clean clone
 on another OS; CI rebuild time. Dolt is a separate binary install, so it costs every stranger something.
 
-**Next:** David continues the design talk in a new session. That session checks in with this one first.
+**Next:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
+Start from this file and LOG.md. First ask: the MCU + eval board pick.
+
+**On GitHub:** `main` pushed (STATUS, LOG, LICENSE). Secret scanning and push protection on.
 
 **Commit identity:** repo-local git config uses David's GitHub noreply address (2026-11-14).
 Never commit with a personal email or the machine default.
