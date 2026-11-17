@@ -1,0 +1,40 @@
+schema_version: 0
+date: '2026-11-17'
+seed: 215024
+walker: Sonnet, blind (citation + blanked template, no values)
+results:
+- record: rohm.esr03.tcr
+  verdict: agree
+  rows_agreed:
+  - 0
+  - 1
+  - 2
+  - 3
+  note: Table 1, TCR column, values shown as +/-100 and +/-200; F row 1<=R<10 is +/-200,
+    10<=R<=10M is +/-100.
+- record: rohm.esr03.range
+  verdict: agree
+  rows_agreed:
+  - 0
+  - 1
+  - 2
+  note: Table 1; F is split into two rows (1<=R<10 and 10<=R<=10M), both E24,E96,
+    merged here to 1..10M.
+  curator: Template had 3 rows, so the walker merged the 2 F rows of Table 1 (1-10
+    and 10-10M Ohm). D and J rows are a clean check.
+- record: rohm.esr03.land_pattern
+  verdict: agree
+  note: ESR/KTR/SDR/SFR table, row 0603 (ESR03); A,B,C,D per Land pattern diagram
+    1.
+- record: rohm.esr03.power.derating
+  verdict: agree
+  note: Rated power text and Figs. 1-4; zero power read from the 155 degC label where
+    curves reach 0%.
+- record: rohm.esr03.marking
+  verdict: disagree
+  diffs:
+  - path: value
+    ours: none
+    walker: There is no marking on the chip resistor.
+  note: Section 5, Markings on chip resistor.
+  curator: Same meaning (no marking). Scoring compares strings literally; not a conflict.

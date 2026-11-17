@@ -22,6 +22,11 @@ clock read about 2.5 min, excluding the earlier reading and search.
 resolved gap, unused newer fact with the same key, or a new family document for gap answers).
 Cache is empty: no session has asked a part question yet.
 
+**Random walks (draft, David 2026-11-17):** `parts-db walk pick|score`, 29 tests. Walk 1 (seed 215024, ESR03,
+5 records, blind Sonnet): 4 agree, 1 string-only mismatch (marking "none" vs a sentence, same meaning).
+Shape lessons: per-row facts without `applies_to` (range) leak the row count and force merges; free-text
+values need a normalized form. D/J rows of tcr and range agreed but are still marked extracted (see NEEDS DAVID).
+
 **Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
 lifecycle check → the board commits its parts.lock.
 
@@ -34,6 +39,9 @@ lifecycle check → the board commits its parts.lock.
 **Test parts:** resistor = ESR03 (done). Regulator and MCU + eval board: open, David's pick.
 
 ## NEEDS DAVID
+- RULING: promote trust when a walk agrees. (a) Edit `trust` in place and log the walk as the review;
+  the value never changes (my pick). (b) Supersede with a new fact. That's safer under rule 3 but
+  bloats the data. Holding the D/J rows of rohm.esr03.tcr and .range until you decide.
 - RULING: regulator and MCU + eval board test parts.
 - TIME: pulse rating for ESR03 is not public. Ask Rohm (Contact Us) when a design needs it.
 - From the hub: the shared distributor offer format, and the lifecycle output format.

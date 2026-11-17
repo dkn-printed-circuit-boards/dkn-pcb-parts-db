@@ -1,6 +1,9 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
 ## 2026-11-17
+- Random walks, draft: `parts-db walk pick` (weighted, seeded, blind templates) and `walk score`
+  (leaf-by-leaf compare, per-row agreement), `data/walks/` logs checked by validate, 6 tests (29).
+  Walk 1 on ESR03: 4 of 5 agree; marking differs in wording only.
 - Answer cache (order O-261117-1, DAVID): CLAUDE.md scope and procedure, SCHEMA.md `data/answers/`,
   validator checks plus computed staleness, `parts-db lookup` (exit 0 current, 1 none, 2 stale,
   3 bad data), 9 new tests (23 total).

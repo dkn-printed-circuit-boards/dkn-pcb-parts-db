@@ -57,6 +57,16 @@ A request outside this scope gets a polite no and a pointer. If the scope should
    resolved, a newer active fact on the same subject and key exists, or (for gap answers) the
    family gained a document since. `validate` lists stale answers.
 
+## Random walks (draft, David 2026-11-17: tune it as the data grows)
+After each check-in batch, and whenever you want an audit:
+1. `uv run parts-db walk pick --n 5 --out <scratchpad>/walkN`. Keep `key.yaml`; the walker never sees it.
+2. A Sonnet agent reads only `tasks.yaml` and the listed PDFs, then writes `results.yaml`. Name the
+   forbidden places by full path (this checkout, `key.yaml`). The cold storage folder is also named
+   dkn-pcb-parts-db, so "don't open dkn-pcb-parts-db" confuses the walker (walk 1).
+3. `uv run parts-db walk score key.yaml results.yaml --walker "Sonnet, blind" --write`.
+4. Agreement promotes extracted to cross-checked and gets a family `reviews` entry. A disagreement
+   becomes a conflict, settled by source rank. If it's ours that's wrong, a new fact supersedes it.
+
 ## Repo rules
 - Public repo: facts, short notes, and citations only. Never copy datasheet text or tables in bulk,
   and never commit PDFs.

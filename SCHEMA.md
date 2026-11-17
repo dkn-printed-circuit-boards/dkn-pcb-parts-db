@@ -9,6 +9,7 @@ data/documents/<first 16 hex of sha256>.yaml   one per source file (datasheet, a
 data/families/<maker>/<series>.yaml            ordering code, shared facts, gaps, reviews
 data/parts/<maker>/<MPN>.yaml                  decoded fields, part-only facts, distributors, conflicts, gaps
 data/answers/<maker>/<MPN or series>.yaml      answer cache: questions other sessions asked, per subject
+data/walks/<date>-s<seed>.yaml                 random-walk logs: blind spot checks against the PDFs
 ```
 
 ## Keys
@@ -54,6 +55,16 @@ never stored. An active answer is stale when:
 3. the subject (the part, or the family behind it) has an active fact with the answer's `key` that the
    answer does not list;
 4. it used a gap and the family's `documents` now include one not in `documents_seen`.
+
+## Random walks (`data/walks/`) — draft, will change with the data
+`parts-db walk pick` picks records at random from a seed, weighted toward weak trust (extracted 8,
+cross-checked 4, simulated 2, human-reviewed 1, proven 0.5; open gaps 3), divided by 1 + times walked.
+Derived facts are skipped, because `validate` recomputes them, and so are web-only sources.
+A walker gets the citation and a template (our value with every value blanked, `applies_to` kept),
+never the value. Log fields: `schema_version`, `date`, `seed`, `walker`, and `results`. Each result has
+`record`, `verdict` (agree, disagree, unstated), and optional `diffs` (`path`, `ours`, `walker`),
+`rows_agreed` (for per-row facts), `walker` (for a found gap), and `note`.
+A walk log is a review: the curator promotes trust on agreement and opens a conflict on disagreement.
 
 ## Rules
 - Store facts, short notes, and citations. Never copy datasheet text or tables in bulk (vendor copyright).

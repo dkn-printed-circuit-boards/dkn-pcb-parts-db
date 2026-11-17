@@ -20,6 +20,7 @@ TRUST_LEVELS = ["extracted", "cross-checked", "simulated", "human-reviewed", "pr
 FACT_STATUS = {"active", "superseded", "disputed"}
 RECORD_STATUS = {"open", "resolved"}
 ANSWER_STATUS = {"active", "superseded"}
+WALK_VERDICTS = {"agree", "disagree", "unstated"}
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -178,6 +179,7 @@ def validate(data_dir: Path, cold_root: Path | None = None) -> Report:
 
     _check_arithmetic(families, parts, report)
     _check_answers(data_dir / "answers", families, parts, all_facts, records, report)
+    walks = _check_walks(data_dir / "walks", all_facts, records, report)
 
     if cold_root is not None:
         _check_cold(docs, cold_root, report)
@@ -189,6 +191,7 @@ def validate(data_dir: Path, cold_root: Path | None = None) -> Report:
         "facts": len(all_facts),
         "conflicts and gaps": len(records),
         "answers": len(report.answers),
+        "walks": walks,
     }
     if report.stale:
         report.notes.append(f"{len(report.stale)} stale answer(s): " + ", ".join(sorted(report.stale)))
@@ -331,6 +334,26 @@ def _check_answers(ans_dir: Path, families, parts, all_facts, records, report: R
             reasons = stale_reasons(ans, subject, families, parts, all_facts, records)
             if reasons:
                 report.stale[ans["id"]] = reasons
+
+
+def _check_walks(walk_dir: Path, all_facts, records, report: Report) -> int:
+    n = 0
+    for path in sorted(walk_dir.glob("*.yaml")):
+        d = _load(path, report)
+        if d is None:
+            continue
+        n += 1
+        for key in ("schema_version", "date", "seed", "walker", "results"):
+            if key not in d:
+                report.err(path, f"missing {key}")
+        if path.stem != f"{d.get('date')}-s{d.get('seed')}":
+            report.err(path, "file name must be <date>-s<seed>")
+        for r in d.get("results") or []:
+            if r.get("record") not in all_facts and r.get("record") not in records:
+                report.err(path, f"walked unknown record {r.get('record')}")
+            if r.get("verdict") not in WALK_VERDICTS:
+                report.err(path, f"{r.get('record')}: verdict must be one of {sorted(WALK_VERDICTS)}")
+    return n
 
 
 def _check_cold(docs: dict, cold_root: Path, report: Report) -> None:
