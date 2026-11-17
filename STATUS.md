@@ -20,6 +20,10 @@ on another OS; CI rebuild time. Dolt is a separate binary install, so it costs e
 14 facts, 1 conflict (Digi-Key says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key part number).
 The format is plain YAML files as the master copy (draft, SCHEMA.md). `uv run parts-db validate` checks the data (14 tests, CI on Linux, Windows, and macOS).
 
+**Decided (David, 2026-11-17):** reverse lookup (specs → part number from a family's ordering code) is built
+only once a family is identified and checked in. It is not a market-wide search; finding families is the
+distributor tools' job.
+
 **Earlier next step:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
 Start from this file and LOG.md. First ask: the MCU + eval board pick.
 
