@@ -18,8 +18,7 @@ on another OS; CI rebuild time. Dolt is a separate binary install, so it costs e
 
 **First check-in done (2026-11-16):** rohm:ESR03EZPF1002 plus the ESR03 EZP family, 4 documents,
 14 facts, 1 conflict (Digi-Key says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key part number).
-The format is plain YAML files as the master copy (draft, SCHEMA.md). There's no repo code yet; the checking
-script was a one-off.
+The format is plain YAML files as the master copy (draft, SCHEMA.md). `uv run parts-db validate` checks the data (14 tests, CI on Linux, Windows, and macOS).
 
 **Earlier next step:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
 Start from this file and LOG.md. First ask: the MCU + eval board pick.

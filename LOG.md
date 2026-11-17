@@ -1,5 +1,9 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
+## 2026-11-17
+- Added the `parts-db validate` command (uv package `dkn_pcb_parts_db`): IDs, citations, trust levels,
+  derived arithmetic, and an optional cold-storage hash check. 14 pytest tests. CI on 3 OSes. README.
+
 ## 2026-11-16
 - First check-in: rohm:ESR03EZPF1002 and the ESR03 EZP family. Four Rohm PDFs went to cold storage by
   sha256. A blind Sonnet second pass agreed on all 16 questions, so the checked facts are cross-checked.
