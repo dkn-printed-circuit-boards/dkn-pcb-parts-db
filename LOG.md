@@ -1,6 +1,8 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
 ## 2026-11-17
+- Ruling (David): trust is edited in place when a review earns it. D/J rows of rohm.esr03.tcr and
+  .range promoted to cross-checked on walk 2026-11-17-s215024; review entry added.
 - Random walks, draft: `parts-db walk pick` (weighted, seeded, blind templates) and `walk score`
   (leaf-by-leaf compare, per-row agreement), `data/walks/` logs checked by validate, 6 tests (29).
   Walk 1 on ESR03: 4 of 5 agree; marking differs in wording only.

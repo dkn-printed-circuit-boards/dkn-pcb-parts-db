@@ -28,7 +28,9 @@ A request outside this scope gets a polite no and a pointer. If the scope should
    known nearby, where was searched (with dates), and what's next. Never infer, borrow from a similar
    part, or fill from memory. (David: this is foundational.)
 2. Every fact cites a document and page, or is `derived` with its inputs. No citation means it's a note.
-3. Facts are only ever added. A fix supersedes the old fact; it never edits it in place.
+3. Facts are only ever added. A fix supersedes the old fact; it never edits it in place. One exception:
+   `trust` gets edited in place when a review earns it, and the value never changes. The `reviews`
+   entry says what was promoted and why (David, 2026-11-17).
 4. Trust, weakest to strongest: extracted < cross-checked < simulated < human-reviewed < proven-on-hardware.
    Cross-checked needs an independent blind pass that agreed, recorded under `reviews`. Only David
    marks human-reviewed.
@@ -64,7 +66,8 @@ After each check-in batch, and whenever you want an audit:
    forbidden places by full path (this checkout, `key.yaml`). The cold storage folder is also named
    dkn-pcb-parts-db, so "don't open dkn-pcb-parts-db" confuses the walker (walk 1).
 3. `uv run parts-db walk score key.yaml results.yaml --walker "Sonnet, blind" --write`.
-4. Agreement promotes extracted to cross-checked and gets a family `reviews` entry. A disagreement
+4. Agreement promotes extracted to cross-checked: edit `trust` in place and add a family `reviews` entry
+   that names the walk and lists `promoted`. A disagreement
    becomes a conflict, settled by source rank. If it's ours that's wrong, a new fact supersedes it.
 
 ## Repo rules

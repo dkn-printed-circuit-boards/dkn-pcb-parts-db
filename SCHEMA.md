@@ -23,7 +23,8 @@ data/walks/<date>-s<seed>.yaml                 random-walk logs: blind spot chec
 
 - **Trust,** weakest to strongest: extracted < cross-checked < simulated < human-reviewed < proven-on-hardware.
   `cross-checked` needs an independent pass that agreed, recorded under `reviews`.
-  Only David marks a fact human-reviewed.
+  Only David marks a fact human-reviewed. Promotion edits `trust` in place (the value never changes);
+  the `reviews` entry that earned it lists what it `promoted`.
 - **Status:** active, superseded, or disputed. Facts are only ever added. A fix is a new fact that
   supersedes the old one.
 

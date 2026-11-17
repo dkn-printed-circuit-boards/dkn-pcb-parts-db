@@ -18,7 +18,8 @@ list the ids they used; stale is computed. The cache is empty: no session has as
 
 **Random walks (draft, David 2026-11-17):** walk 1 (seed 215024, 5 ESR03 records, blind Sonnet): 4 agree,
 and the marking differs in wording only. Shape lessons: per-row facts without `applies_to` (range) leak
-the row count; free-text values need a normalized form.
+the row count; free-text values need a normalized form. Ruling (David): a walk that agrees promotes
+`trust` in place. Done for the D/J rows of tcr and range, so every ESR03 fact is now cross-checked.
 
 **Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
 lifecycle check → the board commits its parts.lock.
@@ -29,9 +30,6 @@ distributors. 3. `parts.lock` format + `parts-db check`. 4. SQLite, once volume 
 **Test parts:** resistor = ESR03 (done). Regulator and MCU + eval board: open, David's pick.
 
 ## NEEDS DAVID
-- RULING: promote trust when a walk agrees. (a) Edit `trust` in place and log the walk as the review;
-  the value never changes (my pick). (b) Supersede with a new fact. That's safer under rule 3 but
-  bloats the data. Holding the D/J rows of rohm.esr03.tcr and .range until you decide.
 - RULING: regulator and MCU + eval board test parts.
 - TIME: pulse rating for ESR03 is not public. Ask Rohm (Contact Us) when a design needs it.
 - From the hub: the shared distributor offer format, and the lifecycle output format.
