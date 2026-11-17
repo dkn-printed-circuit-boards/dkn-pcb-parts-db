@@ -30,7 +30,6 @@ lifecycle check → the board commits its parts.lock.
 
 **Next (my order):** 1. request inbox (one file per request). 2. part-list export for lifecycle and
 distributors. 3. `parts.lock` format + `parts-db check`. 4. SQLite, once volume calls for it.
-
 **Test parts:** resistor = ESR03 (done). Regulator and MCU + eval board: open, David's pick.
 
 ## NEEDS DAVID
