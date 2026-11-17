@@ -22,8 +22,8 @@ the row count; free-text values need a normalized form. Ruling (David): a walk t
 `trust` in place. Done for the D/J rows of tcr and range, so every ESR03 fact is now cross-checked.
 
 **Big-money keys (David, 2026-11-17):** resistor: power rating (I^2 R), tolerance, TCR, size. Capacitor:
-voltage rating, rest depends on the use. Wait for real data and use cases before building on it. Then
-they can set the required check-in facts per category and extra walk weight.
+voltage rating, rest by use. Every board derates every part, and actives must obey abs max. PARKED
+until real data and use cases come: then these set required check-in facts and walk weight.
 
 **Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
 lifecycle check → the board commits its parts.lock.
