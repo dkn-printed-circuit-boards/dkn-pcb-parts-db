@@ -1,6 +1,7 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
 ## 2026-11-17
+- Repo CLAUDE.md: scope guard, truth rules, check-in procedure. STATUS rewritten for a clean restart.
 - Added the `parts-db validate` command (uv package `dkn_pcb_parts_db`): IDs, citations, trust levels,
   derived arithmetic, and an optional cold-storage hash check. 14 pytest tests. CI on 3 OSes. README.
 

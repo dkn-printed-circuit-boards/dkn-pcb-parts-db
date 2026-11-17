@@ -1,39 +1,37 @@
-# STATUS — dkn-pcb-parts-db (2026-11-14)
+# STATUS — dkn-pcb-parts-db (2026-11-17)
 
-**Phase:** design talk. No code, no installs, nothing pushed. Hub advice lives in the hub repo
-(`dkn-pcb-hub`) at `briefs/dkn-pcb-parts-db.md`: what David decided, what the hub leans toward, what's open.
+**Phase:** groundwork. One part is checked in end to end; David is standing up the support sessions
+(digikey, mouser, octopart, lifecycle) and then a real board to test the whole flow.
 
-**Engine lean (not locked):** SQLite as truth plus a sorted text dump in git, so changes read as diffs.
-Dolt is the fallback. A bake-off on 3 test parts decides.
+**Design in use (from talks with David, 2026-11-16/17):**
+- A knowledge base that works with any CAD tool (KiCad, Altium, Xpedition, ...). Scope is in CLAUDE.md; don't let it creep.
+- Text YAML files are the master copy (SCHEMA.md, schema_version 0, draft). A SQLite copy for fast
+  lookups comes later. The SQLite vs Dolt bake-off is moot unless the files stop scaling.
+- Keys: part = maker:MPN; document = sha256; fact = a stable readable id.
+- Gaps are records. "Not stated" is never guessed.
+- Reverse lookup (specs → MPN) gets built per family, only once that family is checked in (David).
 
-**Test parts: placeholders.** David (2026-11-14): "let's give it as an example". Settle them in the design talk.
-| Slot | Placeholder | Tests |
-|---|---|---|
-| Resistor family | Yageo RC series | one datasheet → many MPNs; inherited family facts with per-MPN overrides; required core facts |
-| Regulator | LM1117, or a buck David has used | datasheet revisions; facts with conditions; conflicting values from second sources; SPICE model |
-| MCU + eval board | open: David's pick | pin table, errata, ref design + ref BOM |
+**Checked in:** rohm:ESR03EZPF1002 + the ESR03 EZP family: 4 documents, 14 facts, 1 conflict (Digi-Key
+says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key SKU). Blind Sonnet pass agreed; the
+clock read about 2.5 min, excluding the earlier reading and search.
 
-**Bake-off compares:** how a superseded fact reads in a git diff; the 5 real queries; a clean clone
-on another OS; CI rebuild time. Dolt is a separate binary install, so it costs every stranger something.
+**Tooling:** `uv run parts-db validate [--cold]`, 14 tests, CI green on Linux, Windows, and macOS.
 
-**First check-in done (2026-11-16):** rohm:ESR03EZPF1002 plus the ESR03 EZP family, 4 documents,
-14 facts, 1 conflict (Digi-Key says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key part number).
-The format is plain YAML files as the master copy (draft, SCHEMA.md). `uv run parts-db validate` checks the data (14 tests, CI on Linux, Windows, and macOS).
+**Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
+lifecycle check → the board commits its parts.lock.
 
-**Decided (David, 2026-11-17):** reverse lookup (specs → part number from a family's ordering code) is built
-only once a family is identified and checked in. It is not a market-wide search; finding families is the
-distributor tools' job.
+**Next (my order):**
+1. Request inbox: one file per request, so any session can ask without this one running.
+2. Part-list export for the lifecycle and distributor sessions.
+3. `parts.lock` format and `parts-db check` for boards.
+4. SQLite copy, once data volume calls for it.
 
-**Earlier next step:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
-Start from this file and LOG.md. First ask: the MCU + eval board pick.
-
-**On GitHub:** `main` pushed (STATUS, LOG, LICENSE). Secret scanning and push protection on.
-
-**Commit identity:** repo-local git config uses David's GitHub noreply address (2026-11-14).
-Never commit with a personal email or the machine default.
+**Test parts:** resistor = ESR03 (done). Regulator and MCU + eval board: open, David's pick.
 
 ## NEEDS DAVID
-- RULING: MCU + eval board pick. Gates the bake-off.
-- RULING (hub, not this repo): pushed hub commits carry a machine-default author email (macOS
-  username + hostname). Rewriting that history is David's call. See hub BULLETIN B-261114-9.
-- INSTALL (later): Dolt, when the bake-off starts.
+- RULING: regulator and MCU + eval board test parts.
+- TIME: pulse rating for ESR03 is not public. Ask Rohm (Contact Us) when a design needs it.
+- From the hub: the shared distributor offer format, and the lifecycle output format.
+
+**Hub notes from this session:** BULLETIN B-261114-9..13, B-261115-1, B-261117-1. Hub history was rewritten
+to the noreply email, sync.sh got a first-push fix, and secret scanning plus the org default are on.
