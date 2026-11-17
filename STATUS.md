@@ -21,6 +21,10 @@ and the marking differs in wording only. Shape lessons: per-row facts without `a
 the row count; free-text values need a normalized form. Ruling (David): a walk that agrees promotes
 `trust` in place. Done for the D/J rows of tcr and range, so every ESR03 fact is now cross-checked.
 
+**Big-money keys (David, 2026-11-17):** resistor: power rating (I^2 R), tolerance, TCR, size. Capacitor:
+voltage rating, rest depends on the use. Wait for real data and use cases before building on it. Then
+they can set the required check-in facts per category and extra walk weight.
+
 **Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
 lifecycle check → the board commits its parts.lock.
 
