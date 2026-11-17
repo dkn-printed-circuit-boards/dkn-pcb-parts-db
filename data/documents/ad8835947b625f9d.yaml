@@ -1,0 +1,14 @@
+sha256: ad8835947b625f9db8451851668b1834e1f4e4e0dcec82645f8142f2091052be
+manufacturer: rohm
+title: Notes for Resistors (application note)
+type: application-note
+revision: 67AN013E Rev.005
+date: unknown   # not found in extracted text
+pages: 9
+url: https://fscdn.rohm.com/en/products/databook/applinote/passive/resistor/common/notes_resistors_an-e.pdf
+url_checked: 2026-11-16
+cold_storage: datasheets/ad8835947b625f9db8451851668b1834e1f4e4e0dcec82645f8142f2091052be.pdf
+credibility: secondary
+covers: [general usage precautions for Rohm resistors]
+not_covered: [pulse or surge rating data; only a general caution about transient loads]
+supersedes: null

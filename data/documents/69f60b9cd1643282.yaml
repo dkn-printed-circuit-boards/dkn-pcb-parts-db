@@ -1,0 +1,13 @@
+sha256: 69f60b9cd1643282b6149c9547b52aaf22014c6e7de53c7cb9ba10b7999700fe
+manufacturer: rohm
+title: Resistor - Soldering conditions / land pattern reference (application note)
+type: application-note
+revision: No.67AN023E Rev.010
+date: 2026-01
+pages: 6
+url: https://fscdn.rohm.com/en/techdata_basic/resistor/soldering_condition/soldering_condition_resistors_an-e.pdf
+url_checked: 2026-11-16
+cold_storage: datasheets/69f60b9cd1643282b6149c9547b52aaf22014c6e7de53c7cb9ba10b7999700fe.pdf
+credibility: secondary   # vendor application note, covers many series
+covers: [sample land patterns by series, soldering conditions]
+supersedes: null

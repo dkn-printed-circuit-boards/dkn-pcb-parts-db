@@ -1,0 +1,14 @@
+sha256: 5a31c213e43b16876d1d5822cca64902152c18d380c022bba55adccf8e03d4f2
+manufacturer: rohm
+title: ESR03 EZP series datasheet (Anti-surge Chip Resistors)
+type: datasheet
+revision: ESR03-IA-013E
+date: 2025-10-01
+pages: 8 spec pages + Rohm notice pages
+url: https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/esr03-e.pdf
+url_checked: 2026-11-16   # downloaded copy matched this sha256
+cold_storage: datasheets/5a31c213e43b16876d1d5822cca64902152c18d380c022bba55adccf8e03d4f2.pdf
+credibility: primary   # manufacturer datasheet
+covers: [ordering code, ratings, TCR, derating, dimensions, marking, characteristics tests, tape and reel]
+not_covered: [pulse or surge rating, land pattern, AEC-Q200 statement]
+supersedes: null

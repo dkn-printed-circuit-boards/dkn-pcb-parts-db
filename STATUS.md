@@ -16,7 +16,12 @@ Dolt is the fallback. A bake-off on 3 test parts decides.
 **Bake-off compares:** how a superseded fact reads in a git diff; the 5 real queries; a clean clone
 on another OS; CI rebuild time. Dolt is a separate binary install, so it costs every stranger something.
 
-**Next:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
+**First check-in done (2026-11-16):** rohm:ESR03EZPF1002 plus the ESR03 EZP family, 4 documents,
+14 facts, 1 conflict (Digi-Key says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key part number).
+The format is plain YAML files as the master copy (draft, SCHEMA.md). There's no repo code yet; the checking
+script was a one-off.
+
+**Earlier next step:** David opens a full `dkn-pcb-parts-db` session (`claude -n dkn-pcb-parts-db`) for the design talk.
 Start from this file and LOG.md. First ask: the MCU + eval board pick.
 
 **On GitHub:** `main` pushed (STATUS, LOG, LICENSE). Secret scanning and push protection on.

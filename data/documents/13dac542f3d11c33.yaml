@@ -1,0 +1,14 @@
+sha256: 13dac542f3d11c3328cf96a60a7653458b6d60de7554cea31c7ad2b0d7d01388
+manufacturer: rohm
+title: ESR series lineup (Anti-surge Chip Resistors)
+type: series-lineup
+revision: Rev.001
+date: 2025-10
+pages: 1 lineup page + Rohm notice pages
+url: https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/esr-e.pdf
+url_checked: 2026-11-16   # downloaded copy matched this sha256
+cold_storage: datasheets/13dac542f3d11c3328cf96a60a7653458b6d60de7554cea31c7ad2b0d7d01388.pdf
+credibility: primary
+covers: [series table for ESR01/03/10/18/25, AEC-Q200 availability, part number composition]
+not_covered: [pulse or surge rating]
+supersedes: null

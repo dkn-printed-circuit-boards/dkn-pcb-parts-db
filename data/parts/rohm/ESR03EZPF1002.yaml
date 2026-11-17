@@ -1,0 +1,51 @@
+schema_version: 0   # draft; see SCHEMA.md
+part: rohm:ESR03EZPF1002
+manufacturer: rohm
+mpn: ESR03EZPF1002
+family: rohm.esr03-ezp
+decoded:   # from the family ordering_code
+  packaging: EZP
+  tolerance: F   # +/-1%
+  resistance_ohm: 10000   # code 1002
+
+# Everything in the family's facts applies, picked by tolerance F and 10 kOhm.
+# Only facts specific to this part live here.
+facts:
+  - id: rohm.ESR03EZPF1002.voltage.rated
+    key: voltage.rated
+    value: 57.4
+    unit: V
+    method: derived
+    derivation: "sqrt(0.33 W x 10000 Ohm) = 57.4 V; below the 150 V limit, so 57.4 V applies"
+    inputs: [rohm.esr03.power.rated, rohm.esr03.voltage.limiting]
+    trust: cross-checked
+    status: active
+
+distributors:
+  digikey:
+    sku: unknown
+    description: "RES 10K OHM 1% 1/4W 0603"
+    seen: 2026-11-16
+    source: listing text pasted by David
+
+# Two sources disagree. The higher-credibility one wins; the loser is kept and flagged.
+conflicts:
+  - id: rohm.ESR03EZPF1002.conflict.power
+    key: power.rated
+    claims:
+      - {value: 0.33, unit: W, source: "doc 5a31c213e43b1687 p.2 (Rohm datasheet)"}
+      - {value: 0.25, unit: W, source: "Digi-Key description, seen 2026-11-16"}
+    winner: 0.33 W (manufacturer datasheet outranks distributor text)
+    note: >-
+      Rohm's lineup (doc 13dac542f3d11c33 p.1) marks the 0.33 W rating as New, which suggests
+      Digi-Key shows an older rating. No document seen states the older rating.
+    reported_upstream: no
+    status: open
+
+gaps:
+  - id: rohm.ESR03EZPF1002.gap.digikey_sku
+    key: distributor.digikey.sku
+    question: Digi-Key part number for this MPN
+    searched: []
+    not_yet: [dkn-pcb-digikey CLI]
+    status: open

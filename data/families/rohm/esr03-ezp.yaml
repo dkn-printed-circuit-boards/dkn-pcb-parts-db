@@ -1,0 +1,172 @@
+schema_version: 0   # draft; see SCHEMA.md
+family: rohm.esr03-ezp
+manufacturer: rohm
+series: ESR03 EZP
+category: resistor.chip.thick-film
+description: Anti-surge thick-film chip resistor, 0603 (1608 metric)
+documents: [5a31c213e43b1687, 13dac542f3d11c33, 69f60b9cd1643282, ad8835947b625f9d]
+
+# How a part number decodes. One table covers every MPN in the family.
+ordering_code:
+  pattern: "ESR03 EZP {tolerance} {value}"
+  fields:
+    packaging:
+      EZP: {reel_mm: 180, tape: paper, pitch_mm: 4, qty_per_reel: 5000}
+    tolerance:
+      D: {pct: 0.5, value_digits: 4}
+      F: {pct: 1, value_digits: 4}
+      J: {pct: 5, value_digits: 3}
+    value: "IEC code: 4 digits = 3 significant + multiplier (1002 = 10 kOhm); R marks the decimal point"
+  source: {doc: 5a31c213e43b1687, page: 1, where: "2. Product model; tolerance and resistance value tables"}
+
+# Facts are only ever added. Fix a fact by adding a new one that supersedes it.
+facts:
+  - id: rohm.esr03.size
+    key: package.size
+    value: "0603"
+    conditions: {metric: "1608"}
+    source: {doc: 13dac542f3d11c33, page: 1, where: "Products list, Size column"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.dims
+    key: package.body_mm
+    value: {L: [1.60, 0.10], W: [0.80, 0.10], t: [0.45, 0.10], a: [0.30, 0.20], b: [0.30, 0.20]}
+    unit: mm (nominal, +/- tolerance)
+    source: {doc: 5a31c213e43b1687, page: 3, where: "4. Dimensions table"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.marking
+    key: package.marking
+    value: none
+    source: {doc: 5a31c213e43b1687, page: 3, where: "5. Markings"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.power.rated
+    key: power.rated
+    value: 0.33
+    unit: W
+    conditions: {ambient_c: 70}
+    source: {doc: 5a31c213e43b1687, page: 2, where: "Rated power, specifications column"}
+    also_stated_by: [{doc: 13dac542f3d11c33, page: 1, where: "Products list; marked New"}]
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.power.derating
+    key: power.derating
+    value:
+      - {applies_to: {r_max_ohm: 1000}, ambient_knee_c: 70, terminal_knee_c: 130, zero_power_c: 155}
+      - {applies_to: {r_min_ohm_exclusive: 1000}, ambient_knee_c: 70, terminal_knee_c: 110, zero_power_c: 155}
+    unit: degC
+    source: {doc: 5a31c213e43b1687, page: 2, where: "Figs. 1-4"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.voltage.limiting
+    key: voltage.limiting_element
+    value: 150
+    unit: V
+    note: "Rated voltage = sqrt(P x R), capped at this limit"
+    source: {doc: 5a31c213e43b1687, page: 1, where: "3. Rating, rated voltage row"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.tcr
+    key: tcr
+    value:
+      - {applies_to: {tolerance: D, r_min_ohm: 10, r_max_ohm: 1.0e6}, ppm_per_c: 100, trust: extracted}
+      - {applies_to: {tolerance: F, r_min_ohm: 1, r_max_ohm_exclusive: 10}, ppm_per_c: 200, trust: cross-checked}
+      - {applies_to: {tolerance: F, r_min_ohm: 10, r_max_ohm: 1.0e7}, ppm_per_c: 100, trust: cross-checked}
+      - {applies_to: {tolerance: J, r_min_ohm: 1, r_max_ohm: 1.0e7}, ppm_per_c: 200, trust: extracted}
+    unit: ppm/degC (+/-)
+    conditions: {measured: "+25/-55 degC and +25/+125 degC"}
+    source: {doc: 5a31c213e43b1687, page: 1, where: "Table 1"}
+    also_stated_by: [{doc: 13dac542f3d11c33, page: 1, where: "Products list, ESR03 rows"}]
+    trust: per-row   # second pass checked F tolerance only
+    status: active
+
+  - id: rohm.esr03.range
+    key: resistance.range
+    value:
+      - {tolerance: D, r_min_ohm: 10, r_max_ohm: 1.0e6, series: [E24, E96], trust: extracted}
+      - {tolerance: F, r_min_ohm: 1, r_max_ohm: 1.0e7, series: [E24, E96], trust: cross-checked}
+      - {tolerance: J, r_min_ohm: 1, r_max_ohm: 1.0e7, series: [E24], trust: extracted}
+    note: E24 values are standard products; E96 values are build to order (lineup p.1).
+    source: {doc: 5a31c213e43b1687, page: 1, where: "Table 1"}
+    also_stated_by: [{doc: 13dac542f3d11c33, page: 1, where: "Products list; E24/E96 footnote"}]
+    trust: per-row   # second pass checked F tolerance only
+    status: active
+
+  - id: rohm.esr03.temp.operating
+    key: temperature.operating
+    value: [-55, 155]
+    unit: degC
+    source: {doc: 5a31c213e43b1687, page: 1, where: "3. Rating, operating temperature"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.test.overload
+    key: test.overload
+    value: {max_delta_r: "2% + 0.1 Ohm"}
+    conditions: {stress: "2 x rated voltage for 5 s", max_voltage_v: 200, standard: "JIS C 5201-1 8.1"}
+    note: Pass/fail test at fixed conditions. Not a pulse rating.
+    source: {doc: 5a31c213e43b1687, page: 4, where: "6.3 Overload"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.test.esd
+    key: test.esd
+    value: {max_delta_r: "5% + 0.05 Ohm"}
+    conditions: {voltage_kv: 3, c_pf: 100, r_ohm: 1500, cycles: 1, standard: "EIAJ ED-4701/300 method 304"}
+    note: Pass/fail test at fixed conditions. Not a pulse rating.
+    source: {doc: 5a31c213e43b1687, page: 4, where: "6.12 Static electric characteristics"}
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.aec_q200
+    key: qualification.aec_q200
+    value: yes (vendor claim)
+    note: >-
+      Lineup feature list says "corresponds to AEC-Q200"; its table and Rohm's parametric
+      page (accessed 2026-11-16) list automotive grade as available. No qualification report seen.
+    source: {doc: 13dac542f3d11c33, page: 1, where: "Features item 5; Products list, AEC-Q200 column"}
+    also_stated_by: [{web: "https://www.rohm.com/products/resistors/high-reliability-resistors/anti-surge-chip-resistors", accessed: 2026-11-16, where: "parametric table, Grade column"}]
+    trust: cross-checked
+    status: active
+
+  - id: rohm.esr03.land_pattern
+    key: footprint.vendor_land_pattern
+    value: {gap_A: 1.00, span_B: 2.00, pad_width_C: 0.80, pad_length_D: 0.50}
+    unit: mm
+    note: Rohm "sample" land pattern, not IPC-7351. Check - D + A + D = B (0.50 + 1.00 + 0.50 = 2.00).
+    source: {doc: 69f60b9cd1643282, page: 3, where: "Land pattern diagram 1; ESR/KTR/SDR/SFR table"}
+    trust: cross-checked
+    status: active
+
+# Things we do not know yet. A gap is a record, so nobody pays to search twice.
+gaps:
+  - id: rohm.esr03.gap.pulse
+    key: pulse.rating
+    question: Single-pulse power vs pulse duration (or any surge curve) for ESR03
+    nearest_known: [rohm.esr03.test.overload, rohm.esr03.test.esd]
+    searched:
+      - {where: "doc 5a31c213e43b1687 (ESR03 datasheet)", date: 2026-11-16, found: none}
+      - {where: "doc 13dac542f3d11c33 (ESR lineup)", date: 2026-11-16, found: "qualitative claim only"}
+      - {where: "Rohm anti-surge series page and Design Resources list", date: 2026-11-16, found: none}
+      - {where: "doc ad8835947b625f9d (Notes for Resistors)", date: 2026-11-16, found: "general transient caution only"}
+      - {where: "blind second pass over docs 5a31c213e43b1687, 13dac542f3d11c33, 69f60b9cd1643282", date: 2026-11-16, found: none}
+    not_yet: [Digi-Key and Mouser extra documents, Rohm FAQ, ask Rohm applications engineers]
+    status: open
+
+# Who checked what, and how. This is what earns a fact its trust level.
+reviews:
+  - date: 2026-11-16
+    method: blind second pass (separate Sonnet agent, given documents and questions, not values)
+    questions: 16
+    result: >-
+      Agreed on every value asked: ordering code, power, derating, limiting voltage, F-tolerance
+      TCR and range, operating temperature, dimensions, marking, overload and ESD tests,
+      AEC-Q200 claim, land pattern, 10 kOhm rated voltage, document revisions, and no pulse data.
+    not_covered: [D and J tolerance rows of TCR and range]

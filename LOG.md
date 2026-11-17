@@ -1,5 +1,11 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
+## 2026-11-16
+- First check-in: rohm:ESR03EZPF1002 and the ESR03 EZP family. Four Rohm PDFs went to cold storage by
+  sha256. A blind Sonnet second pass agreed on all 16 questions, so the checked facts are cross-checked.
+  A one-off script checked that ids are unique, citations resolve, and the arithmetic adds up.
+  Draft SCHEMA.md and COLD_STORAGE.md added.
+
 ## 2026-11-14
 - Oriented on the hub rules, conventions, and the parts-db brief. Test parts recorded as placeholders in STATUS.md.
 - Commit identity: git now uses David's GitHub noreply address (global and repo-local).
