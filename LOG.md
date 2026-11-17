@@ -1,6 +1,9 @@
 # LOG — dkn-pcb-parts-db (finished work, newest first)
 
 ## 2026-11-17
+- Answer cache (order O-261117-1, DAVID): CLAUDE.md scope and procedure, SCHEMA.md `data/answers/`,
+  validator checks plus computed staleness, `parts-db lookup` (exit 0 current, 1 none, 2 stale,
+  3 bad data), 9 new tests (23 total).
 - Repo CLAUDE.md: scope guard, truth rules, check-in procedure. STATUS rewritten for a clean restart.
 - Added the `parts-db validate` command (uv package `dkn_pcb_parts_db`): IDs, citations, trust levels,
   derived arithmetic, and an optional cold-storage hash check. 14 pytest tests. CI on 3 OSes. README.

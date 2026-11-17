@@ -15,7 +15,12 @@
 says 1/4 W, Rohm says 0.33 W), 2 open gaps (pulse rating, Digi-Key SKU). Blind Sonnet pass agreed; the
 clock read about 2.5 min, excluding the earlier reading and search.
 
-**Tooling:** `uv run parts-db validate [--cold]`, 14 tests, CI green on Linux, Windows, and macOS.
+**Tooling:** `uv run parts-db validate [--cold]`, `uv run parts-db lookup <subject> <key>`, 23 tests.
+
+**ACK O-261117-1 (DAVID, answer cache), done 2026-11-17:** in CLAUDE.md scope, SCHEMA.md, validator, and
+`parts-db lookup`. Answers list the fact/gap/conflict ids they used; stale is computed (superseded fact,
+resolved gap, unused newer fact with the same key, or a new family document for gap answers).
+Cache is empty: no session has asked a part question yet.
 
 **Board flow (David):** schematic → ask parts-db → shop via distributors → request a check-in →
 lifecycle check → the board commits its parts.lock.

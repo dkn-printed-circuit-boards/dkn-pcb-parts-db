@@ -11,7 +11,9 @@ Boards (`mypcb1`, ...) and support sessions ask parts-db; they never write to it
 ## Scope: hold the line (David, 2026-11-17: "don't let anyone creep your scope")
 **Owns:** part and family records, ordering-code decoding, the document list (PDFs in cold storage
 by sha256), facts with citations and trust, conflicts, gaps, reviews, lessons, the check-in curation,
-and the `parts-db` command plus its published exports.
+the `parts-db` command plus its published exports, and the **answer cache** (David, 2026-11-17, order
+O-261117-1: "it is going to cache everything another session asks it about parts (so it does not have
+to re-lookup something it was asked)").
 **Does not own; say no and point to the right place:**
 - Distributor search, prices, stock → digikey / mouser / octopart repos. Parts-db stores only their
   part numbers and "last seen" dates.
@@ -43,6 +45,17 @@ A request outside this scope gets a polite no and a pointer. If the scope should
    Agreement promotes facts to cross-checked; disagreement becomes a conflict.
 5. `uv run parts-db validate` (add `--cold` when cold storage is mounted) must pass. Then run
    `../tools/check_portable.sh .`, commit, and push through `../tools/sync.sh`.
+
+## Answer cache (every part question another session asks)
+1. Look first: `uv run parts-db lookup <subject> <key>`. Exit 0 = current, answer from the record.
+   Exit 2 = stale (it says why), re-answer. Exit 1 = not cached, answer it.
+2. An answer is built only from records: it lists the fact, gap, and conflict ids it used. "I don't
+   know" is an answer that lists a gap. No ids means no answer; record the gap first.
+3. Record every answer in `data/answers/` (SCHEMA.md), with who asked and when. Asked again and
+   current: add the asker to `asked`. Stale: write a new answer that supersedes the old one.
+4. Stale is computed, never stored: a used fact is no longer active, a used gap or conflict is
+   resolved, a newer active fact on the same subject and key exists, or (for gap answers) the
+   family gained a document since. `validate` lists stale answers.
 
 ## Repo rules
 - Public repo: facts, short notes, and citations only. Never copy datasheet text or tables in bulk,

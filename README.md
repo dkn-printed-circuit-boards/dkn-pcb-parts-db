@@ -14,6 +14,7 @@ Needs [uv](https://docs.astral.sh/uv/) and Python 3.12+. Works on Linux, macOS, 
 ```
 uv sync
 uv run parts-db validate          # check every data file: links, IDs, trust levels, arithmetic
+uv run parts-db lookup rohm:ESR03EZPF1002 power.rated   # cached answer: 0 current, 1 none, 2 stale
 uv run pytest                     # run the tests
 ```
 
@@ -32,6 +33,7 @@ each `data/documents/*.yaml` file and checked against its `sha256`.
 data/documents/   one record per source document
 data/families/    ordering codes and shared facts (one datasheet often covers many parts)
 data/parts/       part-only facts, distributor listings, conflicts, gaps
+data/answers/     answer cache: questions other sessions asked, and the records each answer used
 src/dkn_pcb_parts_db/   the parts-db command
 ```
 
